@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results - Product Launch Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Prediction Results</h1>
+        </header>
+
+        <div class="result-container">
+            <div class="prediction-summary">
+                <h2>Your Launch is Predicted to be:</h2>
+                <div class="prediction-result {{ 'success' if prediction == 'Successful' else 'failure' }}">
+                    <span class="prediction-text">{{ prediction }}</span>
+                    <span class="probability-text">{{ "%.1f" | format(probability * 100) }}% confidence</span>
+                </div>
+            </div>
+
+            <div class="chart-container chart-loading">
+                <h3>📊 Prediction Analysis</h3>
+                <img src="data:image/png;base64,{{ chart_img }}" alt="Prediction Chart" class="chart" 
+                     onload="this.parentElement.classList.remove('chart-loading')">
+            </div>
+
+            <div class="input-summary">
+                <h3>📋 Your Input Details</h3>
+                <div class="input-grid">
+                    <div class="input-item">
+                        <strong>Main Category:</strong> {{ input_data.main_category }}
+                    </div>
+                    <div class="input-item">
+                        <strong>Category:</strong> {{ input_data.category }}
+                    </div>
+                    <div class="input-item">
+                        <strong>Country:</strong> {{ input_data.country }}
+                    </div>
+                    <div class="input-item">
+                        <strong>USD Goal:</strong> ${{ "{:,.0f}".format(usd_goal) }}
+                    </div>
+                    <div class="input-item">
+                        <strong>Campaign Duration:</strong> {{ input_data.campaign_duration }} days
+                    </div>
+                    <div class="input-item">
+                        <strong>Launch Month:</strong> {{ month_name }}
+                    </div>
+                    <div class="input-item">
+                        <strong>Launch Year:</strong> {{ input_data.launch_year }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <a href="{{ url_for('index') }}" class="btn secondary">🔄 Make Another Prediction</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 LaunchLens. All rights reserved.
+            <br> 
+            This application uses machine learning algorithms trained on publicly available 
+            Kickstarter campaign data for educational and predictive purposes. LaunchLens 
+            is not affiliated with Kickstarter PBC. All predictions are estimates based on 
+            historical data and should not be considered as investment advice or guarantees 
+            of campaign success. Users are advised to conduct their own research and due 
+            diligence before launching any crowdfunding campaign.</p>
+        </footer>
+    </div>
+</body>
+</html>
+

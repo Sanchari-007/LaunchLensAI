@@ -1,0 +1,14 @@
+# Ignore virtual environment folders
+.venv/
+product_launch_env/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# OS or editor files
+.DS_Store
+*.log
+
+# Environment files
+.env

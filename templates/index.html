@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaunchLens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 LaunchLens</h1>
+            <p>AI-powered crowdfunding predictor that analyzes Kickstarter campaign data to forecast launch success before you go live.</p>
+        </header>
+
+        {% if error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+
+        <form method="POST" class="prediction-form">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="main_category">Main Category:</label>
+                    <select name="main_category" id="main_category" required>
+                        <option value="">Select Main Category</option>
+                        {% for category in main_categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select name="category" id="category" required>
+                        <option value="">Select Category</option>
+                        {% for category in categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <select name="country" id="country" required>
+                        <option value="">Select Country</option>
+                        {% for country in countries %}
+                        <option value="{{ country }}">{{ country }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="usd_goal">USD Goal ($):</label>
+                    <input type="number" name="usd_goal" id="usd_goal" 
+                           min="1" max="10000000" step="1" required 
+                           placeholder="e.g., 10000">
+                </div>
+
+                <div class="form-group">
+                    <label for="campaign_duration">Campaign Duration (days):</label>
+                    <input type="number" name="campaign_duration" id="campaign_duration" 
+                           min="1" max="365" step="1" required 
+                           placeholder="e.g., 30">
+                </div>
+
+                <div class="form-group">
+                    <label for="launch_month">Launch Month:</label>
+                    <select name="launch_month" id="launch_month" required>
+                        <option value="">Select Month</option>
+                        {% for month in months %}
+                        <option value="{{ month }}">{{ month_names[month] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="launch_year">Launch Year:</label>
+                    <select name="launch_year" id="launch_year" required>
+                        <option value="">Select Year</option>
+                        {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="predict-btn">🔮 Predict Success</button>
+        </form>
+
+        <footer>
+            <p>© 2025 LaunchLens. All rights reserved.
+            <br> 
+            This application uses machine learning algorithms trained on publicly available 
+            Kickstarter campaign data for educational and predictive purposes. LaunchLens 
+            is not affiliated with Kickstarter PBC. All predictions are estimates based on 
+            historical data and should not be considered as investment advice or guarantees 
+            of campaign success. Users are advised to conduct their own research and due 
+            diligence before launching any crowdfunding campaign.</p>
+        </footer>
+    </div>
+</body>
+</html>
